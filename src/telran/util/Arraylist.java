@@ -22,6 +22,7 @@ public class Arraylist<T> implements List<T> {
 		}
 		array[size] = obj;
 		size++;
+		
 		return true;
 	}
 	 private void reallocate() {
@@ -37,42 +38,34 @@ public class Arraylist<T> implements List<T> {
 	@Override
 	public void add(int index, T obj) {
 		//Insert
-		int len = array.length;
-		if(index < 0) {
+		
+		if((index < 0) || (index > size)){
 		//throw exception
 			return;
 		}
-		
-		if(index >= len) {
-		//show window with question : resize of array?
-//			if (No)
-//				return;
-//			else
-//				reallocate();
-//		
-		}
-		if(size == array.length) {
+			
+		if(size >= array.length) {
 			reallocate();
 		}
 		
-		System.arraycopy(array, index, array, index+1, len - index);
+		System.arraycopy(array, index, array, index+1, size - index);
 		array[index] = obj;
 		size++;
-		
-		print("Insert");
-		
 		
 	}
 
 	@Override
 	public T remove(int index) {
-		if((index < 0)||(index > array.length)) {
+		if((index < 0)||(index >= size)) {
 			return null;
 		}
+		
 		T element = array[index];
-		array[index] = null;
-		size--;  // ???? 
+		System.arraycopy(array, index+1, array, index, size - index);
+		size--;  
+		
 		return element;
+		
 	}
 
 	@Override
@@ -87,6 +80,6 @@ public class Arraylist<T> implements List<T> {
 	{
 		System.out.print("\n" + name + "\n");
 		for(int i=0; i< array.length; i++)
-			System.out.print(array[i]);
+			System.out.print(array[i] + " ");
 	}
 }

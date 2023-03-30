@@ -51,18 +51,40 @@ class ArraylistTest {
 	}
 	
 	
-//	@Test
-//	void testAddIndex() {
-//		Arraylist<Integer>  numbers= new Arraylist<>(4);
-//		int n = 3;
-//		for( int i=0; i < n; i++) {
-//			numbers.add(i);
-//		}
-//		Arraylist<Integer> expected1 = new Arraylist<>(4);
-//		
-//		assertArrayEquals(expected1, numbers);
-//		
-//		
-//	}
+	@Test
+	void testAddIndex() {
+		Arraylist<Integer>  numbers= new Arraylist<>();
+		int n = 5;
+		for( int i=0; i < n; i++) {
+			numbers.add(i);
+		}
+		numbers.add(2, 88);
+		assertEquals(2, numbers.get(3));
+		assertEquals(88, numbers.get(2));
+		assertEquals(6, numbers.size());
+		numbers.add(6, 99);
+		assertEquals(99, numbers.get(6));
+		
+	}
+	
+	@Test
+	void testRemoveIndex() {
+		Arraylist<Integer>  numbers= new Arraylist<>();
+		int n = 6;
+		for( int i=0; i < n; i++) {
+			numbers.add(i);
+		}
+		numbers.remove(n+1);
+		assertEquals(n, numbers.size());
+		numbers.remove(-1);
+		assertEquals(n, numbers.size());
+		
+		Integer elem = numbers.remove(2);
+		assertEquals(2, elem);
+		assertEquals(n-1, numbers.size());
+		
+		
+		
+	}
 
 }
