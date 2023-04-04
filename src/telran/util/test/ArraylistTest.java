@@ -3,12 +3,23 @@ package telran.util.test;
 //import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
+
 //import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import telran.util.*;
 
 class ArraylistTest {
-
+	List<Integer> list;
+	Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
+	@BeforeEach
+	void setUp() {
+		list = new Arraylist<>(1);
+		for( int i = 0; i < initNumbers.length; i++) {
+			list.add(initNumbers[i]);
+		}
+	}
+	
 	@Test
 	void testAdd() {
 		Arraylist<Integer>  numbers= new Arraylist<>(4);
@@ -83,8 +94,45 @@ class ArraylistTest {
 		assertEquals(2, elem);
 		assertEquals(n-1, numbers.size());
 		
-		
-		
 	}
+//-------------------------------------------------------	
+	@Test
+	void testIndexOf() {
+		list.add(3, 10);
+		assertEquals(0, list.indexOf(10));
+		assertEquals(-1, list.indexOf(null));
+	}
+	
+	@Test
+	void testLastIndexOf() {
+		list.add(2, 100);
+		assertEquals(5, list.lastIndexOf(100));
+		assertEquals(-1, list.lastIndexOf(6));
+	}
+	
+
+	@Test
+	void testRemove() {
+		Integer a = 100;
+		assertTrue( list.remove(a));
+		a = 66;
+		assertFalse( list.remove(a));
+		assertFalse( list.remove(null));
+	}
+	
+	@Test
+	void toArray() {
+		Integer [] arr = new Integer[list.size()];
+		assertArrayEquals(initNumbers, list.toArray(arr));
+		Integer [] arr_less = new Integer[list.size()-1];
+		assertArrayEquals(initNumbers, list.toArray(arr_less));
+		
+		Integer [] arr_big = {10, -20, 7, 50, 100, 30, 333, 333, 333, 333};
+		Integer []res = list.toArray(arr_big);
+		assertEquals(null, res[list.size()+3]);
+		
+	
+	}
+
 
 }
