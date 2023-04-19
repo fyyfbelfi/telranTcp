@@ -1,5 +1,6 @@
 package telran.util.test;
 
+import static org.junit.Assert.assertArrayEquals;
 //import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import telran.util.*;
+//import IntegerComparator.*;
 
 class ArraylistTest {
 	List<Integer> list;
@@ -133,6 +135,52 @@ class ArraylistTest {
 		
 	
 	}
+	//-------------------------------------------------------	
+	@Test
+	void sortComparator() {
+		//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
+		Integer[] expected = {-20, 7, 10, 30, 50, 100};
+		list.sort();
+		assertArrayEquals(expected, list.toArray(new Integer[0]));
+		
+		Arraylist<Integer> list_sort = new Arraylist<>(10);
+		for( int i = 0; i < 10; i++)
+			list_sort.add(i+1);
+		list_sort.sort();	
+		assertEquals(1, list_sort.get(0));
+		
+	}
+	
+	@Test
+	void sortComparable() {
+		Integer[] expected = {200, 100, 50, 30 , 10, 7, 2, -20};
+		list.add(3, 200);
+		list.add(2);
+		
+		list.sort(new IntegerComparator(false)); 
+		assertArrayEquals(expected, list.toArray(new Integer[0]));
+		
+		Arraylist<Integer> list_sort = new Arraylist<>(10);
+		for( int i = 0; i < 10; i++)
+			list_sort.add(i+1);
+		list_sort.sort(new IntegerComparator(false));	
+		assertEquals(10, list_sort.get(0));
+	}
 
-
+	@Test
+	void sortEventOddComparator() {
+		//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
+		Integer[] expected = {-20, 10, 30, 50, 100, 17, 7};
+		list.add(17);
+		list.sort(new EventOddComparator());
+		assertArrayEquals(expected, list.toArray(new Integer[0]));
+		
+		Arraylist<Integer> list_sort = new Arraylist<>(10);
+		for( int i = 0; i < 10; i++)
+			list_sort.add(i+1);
+		list_sort.sort(new EventOddComparator());	
+		assertEquals(2, list_sort.get(0));
+		assertEquals(1, list_sort.get(9));
+		
+	}
 }

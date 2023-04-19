@@ -1,5 +1,6 @@
 package telran.util;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Arraylist<T> implements List<T> {
 	private static final int DEFAULT_CAPACITY = 4;
@@ -9,6 +10,7 @@ public class Arraylist<T> implements List<T> {
 	@SuppressWarnings("unchecked")
 	public Arraylist(int capacity) {
 		array = (T[]) new Object[capacity];
+		
 	}
 	public Arraylist() {
 		this(DEFAULT_CAPACITY);
@@ -101,7 +103,7 @@ public class Arraylist<T> implements List<T> {
 				res[i] = null;
 			}
 		}
-		print(res, "toArray");
+	//	print(res, "toArray");
 		return res;
 	}
 	@Override
@@ -133,5 +135,51 @@ public class Arraylist<T> implements List<T> {
 			index--;
 		}
 		return res;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	private void bubble_sort(Comparator<T> comp) {
+		boolean swap = false;
+		boolean isContinue = true;
+		int count = 0;
+		for(int i= size; i >0 && isContinue; --i) {  // ???
+			isContinue = false;
+			for (int j = 0; j+1 < i; j++) {
+				if(comp != null)  // use comparator
+				{
+					swap = (comp.compare(array[j], array[j+1]) >0);
+				}
+				else {
+				 	swap = ((Comparable<T>)array[j]).compareTo( array[j+1]) >0;
+				}
+				if(swap)
+				{
+					T temp = array[j+1];
+					array[j+1] = array[j];
+					array[j] = temp;
+					isContinue = true;
+				}
+				
+				count++; 
+				print(array, "step ".concat(Integer.toString(count)));	
+			}
+			
+			
+		}
+
+	}
+	
+	@Override
+	public void sort() {
+		//Arrays.sort(array, 0, size);
+		bubble_sort(null);
+	}
+
+	@Override
+	public void sort(Comparator<T> comp) {
+		//Arrays.sort(array,  0, size, comp);
+		bubble_sort(comp);
+
 	}
 }
