@@ -102,7 +102,7 @@ class ArraylistTest {
 	void testIndexOf() {
 		list.add(3, 10);
 		assertEquals(0, list.indexOf(10));
-		assertEquals(-1, list.indexOf(null));
+		assertEquals(-1, list.indexOf((Integer)null));
 	}
 	
 	@Test
@@ -182,5 +182,37 @@ class ArraylistTest {
 		assertEquals(2, list_sort.get(0));
 		assertEquals(1, list_sort.get(9));
 		
+	}
+	//-------------------------------------------------------------------------
+	@Test
+	void testIndexOfPredicate()  {
+		//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
+		assertEquals(1, list.indexOf(a -> a < 0));
+		list.add(-17);
+		assertEquals(-1, list.indexOf(a -> a % 2 != 0 && a > 7));
+	
+	}
+	
+	@Test
+	void testLastIndexOfPredicate()  {
+		//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
+		list.add(-17);
+		list.add(3, -17);
+		
+		assertEquals(7, list.lastIndexOf(a -> a == -17));
+		
+		assertEquals(6, list.lastIndexOf(a -> a % 3 == 0));
+		assertEquals(-1, list.lastIndexOf(a -> a  == 0));
+	
+	}
+	
+	@Test
+	void testRemoveIfAll() {
+		//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
+		list.add(-17);
+		list.add(3, -17);
+		assertTrue(list.removeIf(a -> a < 0));
+		assertEquals(5, list.size());
+		assertFalse(list.removeIf(a -> a == 18));
 	}
 }
