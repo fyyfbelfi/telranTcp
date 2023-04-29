@@ -229,6 +229,7 @@ public class Arraylist<T> implements List<T> {
 			else
 			{
 				res = true;
+			//	remove(i);
 			}
 		}
 		if(res)
