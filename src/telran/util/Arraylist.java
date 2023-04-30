@@ -144,6 +144,7 @@ public class Arraylist<T> implements List<T> {
 	private void bubble_sort(Comparator<T> comp) {
 		boolean swap = false;
 		boolean isContinue = true;
+		
 	//	int count = 0;
 		for(int i= size; i >0 && isContinue; --i) {  // ???
 			isContinue = false;

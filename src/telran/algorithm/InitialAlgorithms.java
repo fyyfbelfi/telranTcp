@@ -1,6 +1,7 @@
 package telran.algorithm;
 
 import java.awt.print.Printable;
+import java.util.Comparator;
 
 public class InitialAlgorithms {
 	public static void sortShortPositive(short [] array) {
@@ -56,14 +57,48 @@ public class InitialAlgorithms {
 	// return -1 if there is not numbers<0 not correct, i think returning 0 is better
 	public static short getMaxPositiveWithNegativeReflecn(short[] array) { 
 		short res = 0;
+		
+		boolean [] helperPlus = new boolean[Short.MAX_VALUE];
+		boolean [] helperMinus = new boolean[Short.MAX_VALUE];
 		for(int i=0; i<array.length; i++) {
-			if(res > array[i])
-				res = array[i];
+			if(array[i] > 0) {
+				helperPlus[array[i]] = true;
+				if(helperMinus[array[i]]) {
+					res = array[i] > res ? array[i] : res;
+				}
+			}
+			else {  // <0
+				short temp = (short)Math.abs(array[i]);
+				helperMinus[temp] = true;
+				if(helperPlus[temp]) {
+					res = temp > res ? temp : res;
+				}
+			}
+			
 		}
 		
-		res = (short)(res == 0 ? -1 : (0- res));
+		res = (short)(res == 0 ? -1 : res);
 		return (res);
 		
+	}
+	
+	public static void	bubbleSort(short[] array) {
+		boolean isContinue = true;
+		for(int i= array.length; i >0 && isContinue; --i) {  
+			isContinue = false;
+			for (int j = 0; j+1 < i; j++) {
+				if(array[j] >  array[j+1])
+				{
+					short temp = array[j+1];
+					array[j+1] = array[j];
+					array[j] = temp;
+					isContinue = true;
+				}
+					
+			//		count++; 
+			//		print(array, "step ".concat(Integer.toString(count)));	
+			}
+		}
 	}
 	
 	public static void print(short[]arr, String name)
