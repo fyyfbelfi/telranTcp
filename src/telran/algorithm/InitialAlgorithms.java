@@ -1,7 +1,7 @@
 package telran.algorithm;
-
-import java.awt.print.Printable;
 import java.util.Comparator;
+
+
 
 public class InitialAlgorithms {
 	public static void sortShortPositive(short [] array) {
@@ -101,7 +101,46 @@ public class InitialAlgorithms {
 		}
 	}
 	
-	public static void print(short[]arr, String name)
+	public static <T> int binarySearch(T [] array, T key,
+			Comparator<T> comp) {
+		int leftIndex = 0;
+		int rightIndex = array.length - 1;
+		
+		int lim = comp.compare(key, array[0]);
+		if( lim <= 0)
+			return lim == 0 ? 0 : -1;
+
+		int middleIndex = rightIndex / 2;
+		int compRes = 0;
+		int res = -1;
+		boolean Found = false;
+		boolean checkCopy = false;
+		while((leftIndex <= rightIndex) && !checkCopy) {
+			compRes = comp.compare(key, array[middleIndex] );
+			if (compRes == 0) {
+				Found = true; 
+				res = middleIndex;
+			}
+			if (compRes > 0) {
+				//move to right part of the array
+				leftIndex = middleIndex + 1;
+				if(Found) { 
+					checkCopy = true;
+				}
+			} else {
+				rightIndex = middleIndex - 1;
+			}
+			middleIndex = (leftIndex + rightIndex) / 2;
+			
+		}
+		
+		 res = Found ?  res : (-1-leftIndex);
+		System.out.print("\n index " + key + " = " + res  + "\n");
+		return res;
+	}
+	
+		
+	public static <T> void print(T[]arr, String name)
 	{
 		System.out.print("\n" + name + "\n");
 		for(int i=0; i< arr.length; i++)

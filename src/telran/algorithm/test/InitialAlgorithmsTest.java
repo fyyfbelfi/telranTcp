@@ -4,8 +4,9 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import telran.util.Arraylist;
+
 import static telran.algorithm.InitialAlgorithms.*;
+
 
 
 class InitialAlgorithmsTest {
@@ -23,8 +24,8 @@ class InitialAlgorithmsTest {
 	@Test
 	void testIsSum2() {
 		short [] testArray= {1, 4, -2, 8, 3, 9};
-		
-		print(testArray, "Sum");
+				
+	//	print(testArray, "Sum");
 		assertTrue(isSum2(testArray,(short) 12));
 		assertTrue(isSum2(testArray,(short) 6));
 		assertTrue(isSum2(testArray,(short) -1));
@@ -38,7 +39,7 @@ class InitialAlgorithmsTest {
 		for(int i=0; i<10; i++) {
 			testArray[i] = (short) (5 -i);
 		}
-		print(testArray, "max");
+	//	print(testArray, "max");
 		assertEquals(4, getMaxPositiveWithNegativeReflecn(testArray));
 		for(int i=0; i<10; i++) {
 			testArray[i] = (short) i;
@@ -72,5 +73,34 @@ class InitialAlgorithmsTest {
 		bubbleSort(testBigArray);
 		runTest();
 		
+	}
+	
+	@Test
+	void testBinarySearch() {
+		Short [] testArray = new Short[22];
+		for(int i=0; i<20; i++) {
+			if(i >=10 && i< 15)
+				testArray[i] = 21;
+			else	
+			  testArray[i] = (short)(i*2);
+			
+		}
+		testArray[20] = 38;
+		testArray[21] = 38;
+		print(testArray, "bin");
+		int res =binarySearch(testArray, 1,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(-2, res);
+		res =binarySearch(testArray, 12,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(6, res);
+		res =binarySearch(testArray, 40,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(-23, res);
+		res =binarySearch(testArray, 38,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(19, res);
+		res =binarySearch(testArray, 0,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(0, res);
+		res =binarySearch(testArray, 7,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(-5, res);
+		res =binarySearch(testArray, 21,  (a,b )->  a.shortValue() - b.shortValue() );
+		assertEquals(10, res);
 	}
 }
