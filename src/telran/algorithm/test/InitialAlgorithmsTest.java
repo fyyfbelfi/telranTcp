@@ -59,6 +59,20 @@ class InitialAlgorithmsTest {
 			assertTrue(testBigArray[i - 1] <= testBigArray[i]);
 		}
 	}
+	private static final long MGB = 1024 * 1024;
+	private void displayMemoryMap(Runtime runtime) {
+		System.out.printf("free memory: %dM, total memory: %dM, maximal memory:"
+				+ " %dM\n",
+				runtime.freeMemory() / MGB, runtime.totalMemory() / MGB,
+				runtime.maxMemory() / MGB);
+		
+	}
+	
+	@Test
+	void testMemory() {
+		Runtime runtime = Runtime.getRuntime();
+		displayMemoryMap(runtime);
+	}
 	
 	@Test
 	void testSortShortPositive_Big() {
