@@ -1,17 +1,24 @@
 package telran.util.test;
 
-import static org.junit.Assert.assertArrayEquals;
+///import static org.junit.Assert.assertArrayEquals;
 //import static org.junit.Assert.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.BeforeEach;
 
 //import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import telran.util.*;
 //import IntegerComparator.*;
 
-class ArraylistTest {
+class ArrayListTest  extends ListTest{
+
+	@Override
+	protected <T> List<T> getList() {
+		return new Arraylist<>();
+	}
+
+/*class ArraylistTest {
 	List<Integer> list;
 	Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
 	@BeforeEach
@@ -221,5 +228,5 @@ class ArraylistTest {
 		assertTrue(list.removeIf(a -> a < 0));
 		assertEquals(5, list.size());
 		assertFalse(list.removeIf(a -> a == 18));
-	}
+	}*/
 }

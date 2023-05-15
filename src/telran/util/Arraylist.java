@@ -19,6 +19,7 @@ public class Arraylist<T> implements List<T> {
 	}
 	
 	
+	
 	@Override
 	public boolean add(T obj) {
 		if(size == array.length) {
