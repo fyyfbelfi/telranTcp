@@ -44,8 +44,7 @@ public class Arraylist<T> implements List<T> {
 		//Insert
 		
 		if((index < 0) || (index > size)){
-		//throw exception
-			return;
+			throw new IndexOutOfBoundsException(index);
 		}
 			
 		if(size >= array.length) {
@@ -61,7 +60,9 @@ public class Arraylist<T> implements List<T> {
 	@Override
 	public T remove(int index) {
 		if((index < 0)||(index >= size)) {
-			return null;
+			
+				throw new IndexOutOfBoundsException(index);
+			
 		}
 		
 		T element = array[index];
@@ -74,7 +75,8 @@ public class Arraylist<T> implements List<T> {
 	@Override
 	public T get(int index) {
 		if((index < 0)||(index > array.length)) {
-			return null;
+			throw new IndexOutOfBoundsException(index);
+	
 		}
 		return array[index];
 	}
@@ -88,7 +90,14 @@ public class Arraylist<T> implements List<T> {
 	@Override
 	public boolean remove(T pattern) {
 		int index = indexOf(pattern);
-		return (remove(index) != null);
+		try {
+			remove(index) ;
+		}
+		catch(Exception e){
+			return false;
+		
+		}
+		return true;
 	}
 	
 	@Override
@@ -110,7 +119,7 @@ public class Arraylist<T> implements List<T> {
 	}
 	@Override
 	public int indexOf(T pattern) {
-		int res = -1;
+		/*int res = -1;
 		int index = 0;
 		while(index < size && res == -1) {
 			if (isEqual(array[index], pattern)) {
@@ -118,7 +127,9 @@ public class Arraylist<T> implements List<T> {
 			}
 			index++;
 		}
-		return res;
+		//return res;*/
+		
+		return indexOf(obj -> isEqual(obj, pattern));
 	}
 	private boolean isEqual(T object, T pattern) {
 		
@@ -128,7 +139,7 @@ public class Arraylist<T> implements List<T> {
 	
 	@Override
 	public int lastIndexOf(T pattern) {
-		int res = -1;
+		/*int res = -1;
 		int index = size-1;
 		while(index >= 0 && res == -1) {
 			if (isEqual(array[index], pattern)) {
@@ -136,7 +147,8 @@ public class Arraylist<T> implements List<T> {
 			}
 			index--;
 		}
-		return res;
+		return res;*/
+		return lastIndexOf(obj -> isEqual(obj, pattern));
 	}
 	
 	
@@ -210,6 +222,7 @@ public class Arraylist<T> implements List<T> {
 			index--;
 		}
 		return res;
+		
 	}
 	
 	@Override

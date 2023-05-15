@@ -49,7 +49,9 @@ class ArraylistTest {
 		}
 		assertEquals(1, numbers.get(1));
 		assertEquals(null, numbers.get(3));
-		assertEquals(null, numbers.get(-1));
+	//	assertEquals(null, numbers.get(-1));
+		assertThrowsExactly(IndexOutOfBoundsException.class,
+				() ->numbers.get(-1));
 		
 		Arraylist<String>  strs= new Arraylist<>();
 		String s1 = "Hello";
@@ -77,6 +79,10 @@ class ArraylistTest {
 		assertEquals(6, numbers.size());
 		numbers.add(6, 99);
 		assertEquals(99, numbers.get(6));
+		assertThrowsExactly(IndexOutOfBoundsException.class,
+				() ->list.add(list.size() + 1, 100));
+		assertThrowsExactly(IndexOutOfBoundsException.class,
+				() ->list.add(-1, 100));
 		
 	}
 	
@@ -87,9 +93,10 @@ class ArraylistTest {
 		for( int i=0; i < n; i++) {
 			numbers.add(i);
 		}
-		numbers.remove(n+1);
-		assertEquals(n, numbers.size());
-		numbers.remove(-1);
+				
+		assertThrowsExactly(IndexOutOfBoundsException.class,() ->numbers.remove(n+1));
+		Integer dd = -1;
+		numbers.remove(dd);
 		assertEquals(n, numbers.size());
 		
 		Integer elem = numbers.remove(2);
