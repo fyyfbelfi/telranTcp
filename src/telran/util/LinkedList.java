@@ -101,21 +101,80 @@ public class LinkedList<T>  implements List<T> {
 		return lastIndexOf(obj -> isEqual(obj, pattern));
 	}
 
+	private void print(String name)
+	{
+		System.out.print("\n" + name + "\n");
+		Node<T> current = head;
+		while (current != null) {
+			System.out.print(current.obj + " ");
+			current = current.next;
+		}
+	}
+	
+	//TODO
+			//1. call the method toArray
+			//2. By applying Arrays.sort you sort the array from #1
+			//3. Passing over all LinkedList nodes and setting references to objects (T)
+			// in the appropriate order from #2
+
+	private boolean change(T o1, T o2, Comparator<T> comp)
+	{
+		boolean res = false;
+		if(comp != null)  // use comparator
+		{
+			res = (comp.compare(o1, o2) >0);
+		}
+		else {
+		 	res = ((Comparable<T>) o1).compareTo( o2) >0;
+		}
+		return res;
+	}
+	
+	
+	private void bubble_sort(Comparator<T> comp) {
+		
+		
+		int count =0;
+		
+		Node<T> current = head;
+		
+		while (current != null) {
+			Node<T> next =  current.next;
+			
+			while (next != null) {
+				if (change(current.obj, next.obj, comp))
+				{
+					T temp = next.obj;
+					next.obj = current.obj;
+					current.obj = temp;
+					
+				}
+				next = next.next;
+				count++; 
+				print ("step ".concat(Integer.toString(count)));
+			}
+			
+			current = current.next;
+		}
+
+	
+	}
+	
 	@Override
 	public void sort() {
-		//TODO
-
+		bubble_sort(null);
 	}
 
 	@Override
 	public void sort(Comparator<T> comp) {
-		//TODO
-		//1. call the method toArray
-		//2. By applying Arrays.sort you sort the array from #1
-		//3. Passing over all LinkedList nodes and setting references to objects (T)
-		// in the appropriate order from #2
+	
+		bubble_sort(comp);
 
 	}
+	
+	
+		
+	
 
 	@Override
 	public int indexOf(Predicate<T> predicate) {

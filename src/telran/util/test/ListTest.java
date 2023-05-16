@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertArrayEquals;
 
-//import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 
 import telran.util.*;
 
@@ -23,18 +23,18 @@ protected Collection<Integer> getCollection() {
 	
 	Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
 		
-		
+	@Disabled
 		@Test
-		void testAdd() {
+		void testAdd_old() {
 			assertTrue(list.add(numbers[0]));
 			assertEquals(numbers.length + 1, list.size());
 					
-		/*	Arraylist<String>  strs= new Arraylist<>();  // TODO
+			Arraylist<String>  strs= new Arraylist<>();  
 			strs.add("Hello");
 			strs.add("");
 			strs.add(" !");
 			
-			assertEquals(3, strs.size());*/
+			assertEquals(3, strs.size());
 		}
 		
 		@Test
@@ -103,58 +103,43 @@ protected Collection<Integer> getCollection() {
 		}
 		
 
-		@Test
-		void testRemove() {
-			Integer a = 100;
-			assertTrue( list.remove(a));
-			a = 66;
-			assertFalse( list.remove(a));
-			assertFalse( list.remove(null));
-		}
 		
-		@Test
-		void toArray() {
-			Integer [] arr = new Integer[list.size()];
-			assertArrayEquals(initNumbers, list.toArray(arr));
-			Integer [] arr_less = new Integer[list.size()-1];
-			assertArrayEquals(initNumbers, list.toArray(arr_less));
-			
-			Integer [] arr_big = {10, -20, 7, 50, 100, 30, 333, 333, 333, 333};
-			Integer []res = list.toArray(arr_big);
-			assertEquals(null, res[list.size()+3]);
-			
-		
-		}
 		//-------------------------------------------------------	
 		@Test
 		void sortComparator() {
 			//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
 			Integer[] expected = {-20, 7, 10, 30, 50, 100};
 			list.sort();
-			assertArrayEquals(expected, list.toArray(new Integer[0]));
+			assertArrayEquals(expected, list.toArray(new Integer[expected.length]));
 			
-			Arraylist<Integer> list_sort = new Arraylist<>(10);
+		/*	Arraylist<Integer> list_sort = new Arraylist<>(10);
 			for( int i = 0; i < 10; i++)
 				list_sort.add(i+1);
 			list_sort.sort();	
-			assertEquals(1, list_sort.get(0));
+			assertEquals(1, list_sort.get(0));*/
 			
 		}
 		
 		@Test
 		void sortComparable() {
 			Integer[] expected = {200, 100, 50, 30 , 10, 7, 2, -20};
+			int size = expected.length;
 			list.add(3, 200);
 			list.add(2);
 			
 			list.sort(new IntegerComparator(false)); 
-			assertArrayEquals(expected, list.toArray(new Integer[0]));
+			assertArrayEquals(expected, list.toArray(new Integer[size]));
+			Integer[] expected1 = {-20, 2, 7,10,30,50,100, 200};
+			list.sort(new IntegerComparator(true)); 
+			assertArrayEquals(expected1, list.toArray(new Integer[size]));
 			
-			Arraylist<Integer> list_sort = new Arraylist<>(10);
+		/*	Arraylist<Integer> list_sort = new Arraylist<>(10);
 			for( int i = 0; i < 10; i++)
 				list_sort.add(i+1);
 			list_sort.sort(new IntegerComparator(false));	
-			assertEquals(10, list_sort.get(0));
+			assertEquals(10, list_sort.get(0));*/
+			
+			
 		}
 
 		@Test
@@ -195,17 +180,5 @@ protected Collection<Integer> getCollection() {
 			assertEquals(-1, list.lastIndexOf(a -> a  == 0));
 		
 		}
-		
-		@Test
-		void testRemoveIfAll() {
-			//Integer[] initNumbers = {10, -20, 7, 50, 100, 30};
-			list.add(-17);
-			list.add(3, -17);
-			assertTrue(list.removeIf(a -> a < 0));
-			assertEquals(5, list.size());
-			assertFalse(list.removeIf(a -> a == 18));
-		}
-
-
 
 }

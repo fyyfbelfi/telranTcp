@@ -75,7 +75,7 @@ public class Arraylist<T> implements List<T> {
 
 	@Override
 	public T get(int index) {
-		if((index < 0)||(index > array.length)) {
+		if((index < 0)||(index >= size)) {
 			throw new IndexOutOfBoundsException(index);
 	
 		}
@@ -117,6 +117,7 @@ public class Arraylist<T> implements List<T> {
 		}
 	//	print(res, "toArray");
 		return res;
+		
 	}
 	@Override
 	public int indexOf(T pattern) {
