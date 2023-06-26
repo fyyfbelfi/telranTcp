@@ -3,6 +3,7 @@ package telran.util;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 public class HashSet<T> implements Set<T> {
 	private static final int DEFAULT_HASH_TABLE_SIZE = 16;
@@ -160,6 +161,16 @@ public class HashSet<T> implements Set<T> {
 			}
 		}
 		return res;
+	}
+	@Override
+	public T[] toArray(T[] arr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean removeIf(Predicate<T> predicate) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

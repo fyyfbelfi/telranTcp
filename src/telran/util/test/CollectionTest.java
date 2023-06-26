@@ -61,5 +61,7 @@ public abstract class CollectionTest {
 		assertEquals(5, collection.size());
 		assertFalse(collection.removeIf(a -> a == 18));
 	}
+	protected abstract Integer[] getActual(Integer[] actual, int size);
+	protected abstract Integer[] getExpected(Integer[] expected);
 	
 }
