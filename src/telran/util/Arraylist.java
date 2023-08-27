@@ -19,6 +19,7 @@ public class Arraylist<T> implements List<T> {
 	}
 	
 	
+	
 	@Override
 	public boolean add(T obj) {
 		if(size == array.length) {
@@ -44,8 +45,7 @@ public class Arraylist<T> implements List<T> {
 		//Insert
 		
 		if((index < 0) || (index > size)){
-		//throw exception
-			return;
+			throw new IndexOutOfBoundsException(index);
 		}
 			
 		if(size >= array.length) {
@@ -61,7 +61,9 @@ public class Arraylist<T> implements List<T> {
 	@Override
 	public T remove(int index) {
 		if((index < 0)||(index >= size)) {
-			return null;
+			
+				throw new IndexOutOfBoundsException(index);
+			
 		}
 		
 		T element = array[index];
@@ -73,8 +75,9 @@ public class Arraylist<T> implements List<T> {
 
 	@Override
 	public T get(int index) {
-		if((index < 0)||(index > array.length)) {
-			return null;
+		if((index < 0)||(index >= size)) {
+			throw new IndexOutOfBoundsException(index);
+	
 		}
 		return array[index];
 	}
@@ -88,7 +91,14 @@ public class Arraylist<T> implements List<T> {
 	@Override
 	public boolean remove(T pattern) {
 		int index = indexOf(pattern);
-		return (remove(index) != null);
+		try {
+			remove(index) ;
+		}
+		catch(Exception e){
+			return false;
+		
+		}
+		return true;
 	}
 	
 	@Override
@@ -107,10 +117,11 @@ public class Arraylist<T> implements List<T> {
 		}
 	//	print(res, "toArray");
 		return res;
+		
 	}
 	@Override
 	public int indexOf(T pattern) {
-		int res = -1;
+		/*int res = -1;
 		int index = 0;
 		while(index < size && res == -1) {
 			if (isEqual(array[index], pattern)) {
@@ -118,9 +129,11 @@ public class Arraylist<T> implements List<T> {
 			}
 			index++;
 		}
-		return res;
+		//return res;*/
+		
+		return indexOf(obj -> isEqual(obj, pattern));
 	}
-	private boolean isEqual(T object, T pattern) {
+	public boolean isEqual(T object, T pattern) {
 		
 		return pattern == null ? object == pattern :
 			pattern.equals(object);
@@ -128,7 +141,9 @@ public class Arraylist<T> implements List<T> {
 	
 	@Override
 	public int lastIndexOf(T pattern) {
-		int res = -1;
+
+		/*int res = -1;
+
 		int index = size-1;
 		while(index >= 0 && res == -1) {
 			if (isEqual(array[index], pattern)) {
@@ -136,7 +151,8 @@ public class Arraylist<T> implements List<T> {
 			}
 			index--;
 		}
-		return res;
+		return res;*/
+		return lastIndexOf(obj -> isEqual(obj, pattern));
 	}
 	
 	
@@ -144,7 +160,7 @@ public class Arraylist<T> implements List<T> {
 	private void bubble_sort(Comparator<T> comp) {
 		boolean swap = false;
 		boolean isContinue = true;
-		
+
 	//	int count = 0;
 		for(int i= size; i >0 && isContinue; --i) {  // ???
 			isContinue = false;
@@ -211,6 +227,7 @@ public class Arraylist<T> implements List<T> {
 			index--;
 		}
 		return res;
+
 	}
 	
 	@Override
@@ -230,7 +247,7 @@ public class Arraylist<T> implements List<T> {
 			else
 			{
 				res = true;
-			//	remove(i);
+
 			}
 		}
 		if(res)
@@ -243,4 +260,16 @@ public class Arraylist<T> implements List<T> {
 		return res;
 		
 	}
+
+	@Override
+	public boolean contains(T pattern) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
