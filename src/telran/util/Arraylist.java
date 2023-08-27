@@ -141,7 +141,9 @@ public class Arraylist<T> implements List<T> {
 	
 	@Override
 	public int lastIndexOf(T pattern) {
+
 		/*int res = -1;
+
 		int index = size-1;
 		while(index >= 0 && res == -1) {
 			if (isEqual(array[index], pattern)) {
@@ -158,6 +160,7 @@ public class Arraylist<T> implements List<T> {
 	private void bubble_sort(Comparator<T> comp) {
 		boolean swap = false;
 		boolean isContinue = true;
+
 	//	int count = 0;
 		for(int i= size; i >0 && isContinue; --i) {  // ???
 			isContinue = false;
@@ -224,7 +227,7 @@ public class Arraylist<T> implements List<T> {
 			index--;
 		}
 		return res;
-		
+
 	}
 	
 	@Override
@@ -244,6 +247,7 @@ public class Arraylist<T> implements List<T> {
 			else
 			{
 				res = true;
+
 			}
 		}
 		if(res)
@@ -256,6 +260,7 @@ public class Arraylist<T> implements List<T> {
 		return res;
 		
 	}
+
 	@Override
 	public boolean contains(T pattern) {
 		// TODO Auto-generated method stub
@@ -266,4 +271,5 @@ public class Arraylist<T> implements List<T> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
