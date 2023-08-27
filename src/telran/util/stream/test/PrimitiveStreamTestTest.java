@@ -3,6 +3,8 @@ package telran.util.stream.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import static telran.util.stream.PrimitiveStreams.*;
+import telran.util.HashSet;
 
 class PrimitiveStreamTestTest {
 

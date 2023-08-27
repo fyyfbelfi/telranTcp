@@ -3,6 +3,7 @@ package telran.util;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 public class TreeSet<T> implements SortedSet<T> {
 	private static class Node<T> {
@@ -385,6 +386,18 @@ public class TreeSet<T> implements SortedSet<T> {
 		T res = null;
 		res = floor(pattern);
 		return res != null && comp.compare(pattern, res) == 0 ? res : null;
+	}
+
+	@Override
+	public T[] toArray(T[] arr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeIf(Predicate<T> predicate) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

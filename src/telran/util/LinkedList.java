@@ -2,6 +2,7 @@ package telran.util;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.function.Predicate;
 
 public class LinkedList<T>  implements List<T> {
@@ -310,9 +311,19 @@ public class LinkedList<T>  implements List<T> {
 		size--;
 	}
 
-	private boolean isEqual(T object, T pattern) {
+	public boolean isEqual(T object, T pattern) {
 
 		return pattern == null  ? object == pattern : pattern.equals(object);
+	}
+
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean contains(T obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

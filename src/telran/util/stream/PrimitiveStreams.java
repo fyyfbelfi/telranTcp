@@ -1,8 +1,9 @@
 package telran.util.stream;
 import java.util.Random;
-//TODO
-import telran.util.ArrayList;
+
+import telran.util.Arraylist;
 import telran.util.List;
+
 
 public class PrimitiveStreams {
 	static public int[] randomUnique(int nNumbers, int minInclusive,
@@ -16,7 +17,7 @@ public class PrimitiveStreams {
 	
 	static public int[] shuffle(int[] array) {
 		 
-		//returns new array with shuffled numbers
+		///returns new array with shuffled numbers
 		//Implementation hints: two stream pipes
 		//first stream pipe fills telran.util.ArrayList<Integer> with array's numbers in the
 		// random order ( apply the same approach
@@ -24,12 +25,12 @@ public class PrimitiveStreams {
 		// adding numbers to the ArrayList
 		// 
 		//second stream pipe creates array of int's from telran.util.ArrayList as we have done at class
-		int [] res = new int[array.length];
-	    int []index = {0};
+		List<Integer> list = new Arraylist<>();
 		new Random().ints(0, array.length).distinct().limit(array.length)
-		.forEach(i -> res[index[0]++] = array[i]);
+		.forEach(i -> list.add(array[i]));
 		
-		return res;
+		return list.stream().mapToInt(n -> n).toArray();
+		
 	}
 
 }

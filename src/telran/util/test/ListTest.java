@@ -180,5 +180,16 @@ protected Collection<Integer> getCollection() {
 			assertEquals(-1, list.lastIndexOf(a -> a  == 0));
 		
 		}
+		
+		@Override
+		protected Integer[] getActual(Integer[] array, int size) {
+			
+			return array;
+		}
+		@Override
+		protected Integer[] getExpected(Integer[] array) {
+			
+			return array;
+		}
 
 }

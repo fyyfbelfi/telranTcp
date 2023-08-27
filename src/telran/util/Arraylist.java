@@ -133,7 +133,7 @@ public class Arraylist<T> implements List<T> {
 		
 		return indexOf(obj -> isEqual(obj, pattern));
 	}
-	private boolean isEqual(T object, T pattern) {
+	public boolean isEqual(T object, T pattern) {
 		
 		return pattern == null ? object == pattern :
 			pattern.equals(object);
@@ -255,5 +255,15 @@ public class Arraylist<T> implements List<T> {
 		
 		return res;
 		
+	}
+	@Override
+	public boolean contains(T pattern) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
